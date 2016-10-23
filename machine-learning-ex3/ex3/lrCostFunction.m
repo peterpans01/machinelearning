@@ -36,15 +36,31 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+ h = sigmoid(X * theta);
+ %fprintf(" Size of h: %i %i \n", size(h,1), size(h, 2));
+ J1 = 1/m * sum(- y .* log(h) - (1 - y) .* log(1 - h));
+ %fprintf(" Value of J1: %d \n", J1);
+ J2 = lambda/(2* m) * sumsq(theta(2:end)(:));
+ %fprintf(" Value of J2: %d \n", J2);
+ J = J1 + J2;
+ 
+ %fprintf(" Value of J: %d \n", J);
+ grad = 1/m * (X' * (h -y));
+ 
+ %fprintf(" Size of grad: %i %i \n", size(grad,1), size(grad, 2));
+ grad(2:end,:) =  grad(2:end,:) + lambda/m * (theta(2:end,:));
 
-
-
-
-
-
-
-
-
+%h = sigmoid(X*theta);
+%J = sum(y'*log(h) + (1-y)'*log(1-h)) * -1/m;
+%grad = ((h-y)'*X)/m;
+%
+%% make theta(0) to be zero, so regression is not calculated for it.
+%theta_partial =  theta;
+%theta_partial(1) = 0;
+%
+%J = J + ((lambda/(2*m)) * (theta_partial'*theta_partial));
+%grad = grad + (lambda/m * theta_partial');
+ 
 % =============================================================
 
 grad = grad(:);
