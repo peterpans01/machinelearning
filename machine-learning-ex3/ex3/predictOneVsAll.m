@@ -32,6 +32,7 @@ X = [ones(m, 1) X];
 result_matrix = sigmoid(all_theta * X');
 %disp(result_matrix(:,1))
 [temp, p] = max(result_matrix);
+p = p';
 %disp(p);
 %disp(temp);
         
